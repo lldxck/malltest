@@ -6,8 +6,8 @@
     <home-swiper :banner="banner"></home-swiper>
     <recommend :recommend="recommend"></recommend>
     <feature></feature>
-    <tab-control :titles="titles"></tab-control>
-    <goods-list :goods="goods"></goods-list>
+    <tab-control :titles="titles" @tabClick="tabClick"></tab-control>
+    <goods-list :goods="goods[currentGoodsType].list"></goods-list>
 
   </div>
 </template>
@@ -28,13 +28,19 @@ export default {
       banner:[],
       recommend:[],
       titles:['流行','新款','精选'],
-      goods:[],
-
+      goods:{
+        pop:{page:0,list:[]},
+        new:{page:0,list:[]},
+        sell:{page:0,list:[]},
+      },
+      currentGoodsType:'pop'
     }
   },
   created(){
     this.getHomeData();
-    this.getGoodsData();
+    this.getGoodsData('pop');
+    this.getGoodsData('new');
+    this.getGoodsData('sell');
   },
   methods:{
     getHomeData(){
@@ -44,11 +50,35 @@ export default {
         this.recommend=res.data.recommend.list;
       })
     },
-    getGoodsData(){
-      GetGoodsData('pop',1).then(res => {
-        console.log(res);
-        this.goods=res.data.list;
+    // getGoodsData(){
+    //   GetGoodsData('pop',1).then(res => {
+    //     console.log(res);
+    //     this.goods=res.data.list;
+    //   })
+    // }
+    getGoodsData(type){
+      const page = this.goods[type].page+1;
+      GetGoodsData(type,page).then(res => {
+        console.log(res)
+        this.goods[type].page+=1;
+        this.goods[type].list.push(...res.data.list)
       })
+
+    },
+    tabClick(index){
+      switch(index){
+        case 0:
+          this.currentGoodsType='pop'
+          break
+        case 1:
+          this.currentGoodsType='new'
+          break
+        case 2:
+          this.currentGoodsType='sell'
+          break
+
+      }
+      
     }
   },
   components: {
