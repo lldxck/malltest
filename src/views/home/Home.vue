@@ -6,7 +6,7 @@
     <home-swiper :banner="banner"></home-swiper>
     <recommend :recommend="recommend"></recommend>
     <feature></feature>
-    <tab-control :titles="titles" @tabClick="tabClick"></tab-control>
+    <tab-control :titles="titles" @tabClick="tabClick" class="tabControl"></tab-control>
     <goods-list :goods="goods[currentGoodsType].list"></goods-list>
 
   </div>
@@ -99,5 +99,12 @@ export default {
 }
 .nav-bar {
   background-color: var(--color-tint);
+}
+.tabControl{
+  position: sticky;
+  top:44px;
+  background-color: #fff;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 </style>

@@ -37,7 +37,6 @@ export default {
 .tab-control {
   display: flex;
   text-align: center;
-  margin-bottom: 10px;
 }
 .tab-control-item {
   flex: 1;

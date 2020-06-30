@@ -22,9 +22,9 @@ export default {
 
 <style>
 .goods-list{
-  padding:5px 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding:0 8px;
 }
 </style>
