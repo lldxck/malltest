@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" ref="wrapper">
     <ul class="content">
       <li>1</li>
       <li>2</li>
@@ -109,10 +109,27 @@
 import BScroll from 'better-scroll'
 
 export default {
+  data(){
+    return{
+      scroll:null,
+    }
+  },
   mounted(){
-    let scroll = new BScroll(document.querySelector('.wrapper',{}))
-  }
+    // this.scroll = new BScroll(this.$refs.wrapper,{
+    this.scroll = new BScroll(document.querySelector('.wrapper'),{
+      probeType:2,
+      pullUpLoad:true
+    })
 
+    this.scroll.on('scroll',(position) => {
+      // console.log(position)
+    })
+
+    this.scroll.on('pullingUp',() => {
+      console.log('上拉加载数据')
+      this.scroll.finishPullUp()
+    })
+  }
 }
 </script>
 
