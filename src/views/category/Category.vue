@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper" ref="wrapper">
     <ul class="content">
+      <button @click="btnClick">按钮</button>
       <li>1</li>
       <li>2</li>
       <li>3</li>
@@ -118,6 +119,7 @@ export default {
     // this.scroll = new BScroll(this.$refs.wrapper,{
     this.scroll = new BScroll(document.querySelector('.wrapper'),{
       probeType:2,
+      click:true,
       pullUpLoad:true
     })
 
@@ -129,6 +131,11 @@ export default {
       console.log('上拉加载数据')
       this.scroll.finishPullUp()
     })
+  },
+  methods:{
+    btnClick(){
+      console.log('按钮被点击了')
+    }
   }
 }
 </script>
